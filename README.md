@@ -2,7 +2,10 @@
 
 This repository contains various things that I've created while studying Geometric Optics.
 
- * [Link to notes](/optics.html)
+ * Document with Wikipedia information describing each topic concisely.
+ * Implementation of an optics engine with HTML canvas.
+
+[Link to notes](https://darkeclipz.github.io/learn_optics/)
 
 # References
 
