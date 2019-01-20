@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Geometric optics</title>
+        <style>
+        body{margin: 40px auto; max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}
+        img{ margin: 14px auto; }
+        table { border: 1px #ddd solid; border-collapse: collapse; }
+        table td { border: 1px #ddd solid; padding: 6px 10px; }
+        table thead { font-weight: bold; }
+        canvas { border: 1px #ddd solid; }
+        </style>
+        <script src="draw.js"></script>
+        <script src="vec2.js"></script>
+        <script src="math.js"></script>
+        <script src="ray.js"></script>
+        <script src="surface.js"></script>
+    </head>
+    <body>
+        <h1>Geometric optics</h1>
+        
+        <h2>1. Reflection and refraction</h2>
+
+        <h3>1.1 Specular and diffuse reflection</h3>
+
+        <p>
+            When light hits a surface, three possible things can occur. 
+            Light can be absorbed by the material, light can be transmitted through a material, or light may be reflected. 
+        </p>
+
+        <p>
+            Reflected light can be divided into two sub-type, <i>specular reflection</i> and <i>diffuse reflection</i>.
+            Specular reflection reflects all the light from a given direction at the same angle, whereas diffuse reflection reflects that light in a broad range of angles.
+        </p>
+
+        <p>
+            What we normally think of when we talk about reflection, is <i>specular reflection</i>.  
+            The ray $P$ that first hits the surface is called the <i>incident ray</i>, and the ray $Q$ that bounces of the surface is called the <i>reflected ray</i>. 
+        </p>
+
+        <div style="text-align: center">
+            <img src="img/reflection.png"/>
+        </div>
+
+        <p>
+            The angle $\theta_i$ between the normal of the surface and the incident ray is the <i>angle of incident</i>. 
+            Likewise, the angle $\theta_r$ between the normal and the reflected ray is the <i>angle of reflection</i>.
+            The fraction of light that is reflected increases with increasing angle of incidence $\theta_i$.
+            The <i>Law of Reflection</i> states that $\theta_i = \theta_r$, meaning that the angle of incidence is the same as the angle of reflection. 
+        </p>     
+
+        <canvas id="example1"></canvas>
+        
+        <p>
+            The direction of a reflected ray is determined by the vector of incidence and the surface normal vector. 
+            Given an incident direction $\hat{\mathbf{d}_i}$ from the surface to the light source and the surface normal direction $\hat{\mathbf{d_n}}$,
+            the specularly reflected direction $\hat{\mathbf{d_s}}$ is:
+
+            $$ \hat{\mathbf{d_s}} = 2 \left(\hat{\mathbf{d_n}} \bullet \hat{\mathbf{d_i}} \right) \hat{\mathbf{d_n}} - \hat{\mathbf{d_i}}, $$
+
+            where $\hat{\mathbf{d_n}} \bullet \hat{\mathbf{d_i}}$ is a scalar product obtained with the dot product.
+        </p>
+
+        <h3>1.2 Refraction and Snell's law</h3>
+
+        <p>
+            In physics, <i>refraction</i> is the change in direction of a wave passing from one medium to another or from a gradual change in the medium.
+            For light, refraction follows <i>Snell's Law</i>, which states that, for a given pair of media, the ratio of the sines of the angle of incidence $\theta_1$ and the angle of refraction $\theta_2$ is equal to the ratio of phase velocities $(v_1 / v_2)$ in the two media.
+            
+            <div style="text-align: center">
+                <img src="img/refraction.png"/>
+            </div>
+            
+            
+            This is the <i>Law of Refraction</i> and can be written as:
+
+            $$ \dfrac{\sin\theta_1}{\sin\theta_2} = \dfrac{v_1}{v_2} $$
+        </p>
+
+        <p>
+            For light, the <i>refractive index</i> $n$ of a material is more often used than the wave sphase speed $v$ in the material.
+            They are, however, directly related through the speed of light through a vacuum $c$ as
+
+            $$n = \dfrac{c}{d}.$$
+
+            In optics, therefore, the law of refraction is typically written as
+
+            $$n_1\sin\theta_1 = n_2\sin\theta_2. $$
+
+            The following table contains a list of materials and the respective refractive index $n$. For liquids, the index is measured at $20^\circ \textrm{C}$.
+            
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Material</td>
+                    <td>Refractive index ($n$)</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vacuum</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Air</td>
+                    <td>1.000293</td>
+                </tr>
+                <tr>
+                    <td>Water</td>
+                    <td>1.333</td>
+                </tr>
+                <tr>
+                    <td>Olive oil</td>
+                    <td>1.47</td>
+                </tr>
+                <tr>
+                    <td>Ice</td>
+                    <td>1.31</td>
+                </tr>
+                <tr>
+                    <td>Glass</td>
+                    <td>1.52</td>
+                </tr>
+                <tr>
+                    <td>Diamond</td>
+                    <td>2.42</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>1.3 Total internal reflection</h3>
+
+        <h3>1.4 Dispersion</h3>
+
+        <h2>2. Mirrors</h2>
+
+        <h3>2.1 Virtual image</h3>
+
+        <h3>2.2 Parabolic mirrors and real images</h3>
+
+        <h3>2.3 Convex parabolic mirrors</h3>
+
+        <h3>2.4 Derivation of the mirror equation</h3>
+
+        <h2>3. Lenses</h2>
+
+        <h3>3.1 Convex lenses</h3>
+
+        <h3>3.2 Concave lenses</h3>
+
+        <h3>3.3 Object image and focal distance relationship</h3>
+
+        <h3>3.4 Object image height and distance relationship</h3>
+
+        <h3>3.5 Thin lens equation and problem solving</h3>
+
+        <h3>3.6 Multiple lens systems</h3>
+
+        <h3>3.7 Diopters, abberration, and the human eye</h3>
+
+        <h2>Appendix</h2>
+
+        <h3>Appendix A: Intersection of two lines segments</h3>
+
+        <h3>Appendix B: Intersection of line and rectangle</h3>
+        
+        <h3>Appendix C: Intersection of line and circle</h3>
+
+     
+    </body>
+    <script type="text/x-mathjax-config">
+        // Use $ for inline equations.
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+    </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="example1.js"></script>
+</html>
