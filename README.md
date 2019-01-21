@@ -14,3 +14,4 @@ This repository contains various things that I've created while studying Geometr
  3. https://en.wikipedia.org/wiki/Refractive_index
  4. https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect/565282#565282
  5. https://www.khanacademy.org/science/physics/geometric-optics
+ 6. https://people.eecs.berkeley.edu/~cecilia77/graphics/a6/#part2
