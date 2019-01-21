@@ -7,11 +7,15 @@ This repository contains various things that I've created while studying Geometr
 
 # Applications
 
-The following are three ideas that I'm working on when I have time.
+The following list are three ideas that I'm working on when I have time.
 
  * Implement a 2D optics engine.
  * Implement a 3D ray tracer.
  * Implement a 3D spectral ray tracer, see reference 6.
+
+# Optix API
+
+The API documentation for Optix will be added here.
 
 # References
 

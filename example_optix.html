@@ -6,17 +6,44 @@
     <title>Optics -- Reflection example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { margin: 0; padding: 0; }
+        body { margin: 0; padding: 0; overflow: hidden; }
         canvas { border: 1px #ddd solid; }
     </style>
-    <script src="draw.js"></script>
-    <script src="vec2.js"></script>
-    <script src="math.js"></script>
-    <script src="ray.js"></script>
-    <script src="surface.js"></script>
 </head>
 <body>
-    <canvas id="example1"></canvas>
-    <script src="example1.js"></script>
+    <canvas id="optix"></canvas>
+    <script src="optix.js"></script>
+    <script>
+
+        const COLOR_RED = Vec3.fromHex('fc4520');
+        const COLOR_BLUE = Vec3.fromHex('4520fc');
+        const COLOR_YELLOW = Vec3.fromHex('d7fc20');
+        const COLOR_PURPLE = Vec3.fromHex('6200ee');
+        const COLOR_CYANGREEN = Vec3.fromHex('03dac6');
+        const COLOR_BLACK = new Vec3(0);
+
+        let optix = new Optix('optix');
+        optix.scene = Optix.createScene();
+
+        let reflectiveMedium = Optix.createMedium();
+        reflectiveMedium.reflect = true;
+        
+        let triangle = Optix.createTriangle(new Vec2(window.innerWidth / 1.4, 500), 0, 300, reflectiveMedium, COLOR_BLUE);
+        triangle.fill = true;
+        triangle.fillColor = COLOR_BLUE;
+        triangle.fillAlpha = 0.25;
+        triangle.animation = (tri) => tri.rot += 0.0005;
+
+        let nLasers = 10;
+        let spaceLasers = 8;
+        for(let i=0; i <= nLasers; i++) {
+            let laser = Optix.createLaser(new Vec2(150, window.innerHeight / 2 - spaceLasers*nLasers/2 + spaceLasers * i).apply(Math.floor), 0, Vec3.fromHex('ff0000'));
+            optix.scene.lights.push(laser);
+        }
+
+        optix.out.setWidth(1);
+        optix.scene.shapes.push(triangle);
+    
+    </script>
 </body>
 </html>

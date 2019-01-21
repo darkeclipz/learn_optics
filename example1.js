@@ -1,53 +1,51 @@
-let example1 = new Draw('example1');      
-let angle = 0;
-let renderExample1 = () => {
+{
 
-    requestAnimationFrame(renderExample1);
-    example1.clear();
+    const COLOR_RED = Vec3.fromHex('fc4520');
+    const COLOR_BLUE = Vec3.fromHex('4520fc');
+    const COLOR_YELLOW = Vec3.fromHex('d7fc20');
+    const COLOR_PURPLE = Vec3.fromHex('6200ee');
+    const COLOR_CYANGREEN = Vec3.fromHex('03dac6')
+    const COLOR_BLACK = new Vec3(0);
     
-    let surface = new Surface(new Vec2(500, 25), new Vec2(600, 275));
-    let ray = new Ray(new Vec2(50, 150), new Vec2(1, 0).rotate(Math.cos(angle) * Math.PI / 16)
-        .normalize()
-        .scale(25));
-
-    let longRay = new Ray(new Vec2(50, 150), new Vec2(1, 0).rotate(Math.cos(angle) * Math.PI / 16)
-        .normalize()
-        .scale(new Vec2(example1.canvas.width, example1.canvas.height).length()),
-        'gray');
-
-    drawSurface(surface, example1);
+    let optix = new Optix('example1', 650, 300);
+    optix.scene = Optix.createScene();
     
-    let intersection = longRay.intersect(surface.toRay());
-
-    if(intersection) {
-
-        example1.width(2);
-        example1.color('red');
-        example1.line(ray.pos.add(ray.dir), intersection);
-
-        let sn = surface.toRay().dir.normal().normalize();
-        example1.width(1);
-        example1.color('gray');
-
-        example1.ctx.setLineDash([5, 3])
-        example1.line(intersection, intersection.add(sn.scale(100)));
-        example1.ctx.setLineDash([1, 0])
-
-        let di = longRay.dir;
-        let dndi = 2 * sn.dot(di);
-        let ds = sn.scale(dndi).subtract(di);
-
-        let reflectionRay = new Ray(intersection, 
-            ds.normalize().scale(-new Vec2(example1.canvas.width, example1.canvas.height).length()));
-        drawRay(reflectionRay, example1);
-
-        let angle = sn.angle(longRay.dir);
-
+    let reflectiveMedium = Optix.createMedium();
+    reflectiveMedium.reflect = true;
+    
+    let absorbingMedium = Optix.createMedium();
+    absorbingMedium.absorb = true;
+    
+    let triangle = Optix.createTriangle(new Vec2(525, 150), 0, 100, reflectiveMedium, COLOR_BLUE);
+    triangle.fill = true;
+    triangle.fillColor = COLOR_BLUE;
+    triangle.fillAlpha = 0.25;
+    triangle.animation = (tri) => tri.rot += 0.0005;
+    
+    let stri1 = Optix.createTriangle(new Vec2(350, 100), 0, 50, reflectiveMedium, COLOR_BLUE);
+    stri1.fill = true;
+    stri1.fillColor = COLOR_BLUE;
+    stri1.fillAlpha = 0.25;
+    stri1.animation = (tri) => tri.rot += 0.0007;
+    
+    let stri2 = Optix.createTriangle(new Vec2(200, 200), 0, 50, absorbingMedium, COLOR_BLACK);
+    stri2.fill = true;
+    stri2.fillColor = COLOR_BLACK;
+    stri2.fillAlpha = 0.25;
+    stri2.animation = (tri) => tri.rot += 0.0009;
+    
+    let nLasers = 24;
+    let spaceLasers = 8;
+    let pos = new Vec2(50, 150);
+    pos.y -= nLasers * spaceLasers / 2;
+    for(let i=0; i <= nLasers; i++) {
+        let laser = Optix.createLaser(pos.add(new Vec2(0, i*spaceLasers).apply(Math.floor)), 0, Vec3.fromHex('ff0000'));
+        optix.scene.lights.push(laser);
     }
-    else drawRay(longRay, example1);
     
-    drawRay(ray, example1);
-    angle += 0.01;
-};
+    optix.out.setWidth(1);
+    optix.scene.shapes.push(stri1);
+    optix.scene.shapes.push(stri2);
+    optix.scene.shapes.push(triangle);
 
-renderExample1();
+};

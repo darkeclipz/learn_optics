@@ -10,11 +10,7 @@
         table thead { font-weight: bold; }
         canvas { border: 1px #ddd solid; }
         </style>
-        <script src="draw.js"></script>
-        <script src="vec2.js"></script>
-        <script src="math.js"></script>
-        <script src="ray.js"></script>
-        <script src="surface.js"></script>
+        <script src="optix.js"></script>
     </head>
     <body>
         <h1>Geometric optics</h1>
@@ -61,6 +57,23 @@
             where $\hat{\mathbf{d_n}} \bullet \hat{\mathbf{d_i}}$ is a scalar product obtained with the dot product.
         </p>
 
+        <p>
+            If all the incident rays are reflected at the same angle, which happens when the surface is smooth, we speak of <i>specular reflection</i>. 
+
+            <div style="text-align: center">
+              <img src="img/reflections.png"/>
+            </div>
+
+            If a surface is not smooth, as in the second example in the image, the reflected rays have different angles.
+            If the ray is reflected at different angles, we speak of <i>diffuse reflection.</i>
+        </p>
+
+        <canvas id="example2"></canvas>
+
+        <p>
+            An easy way to implement diffuse reflection, is by adding a random angle to the reflection ray. 
+        </p>
+
         <h3>1.2 Refraction and Snell's law</h3>
 
         <p>
@@ -70,7 +83,6 @@
             <div style="text-align: center">
                 <img src="img/refraction.png"/>
             </div>
-            
             
             This is the <i>Law of Refraction</i> and can be written as:
 
@@ -86,6 +98,8 @@
             In optics, therefore, the law of refraction is typically written as
 
             $$n_1\sin\theta_1 = n_2\sin\theta_2. $$
+
+            
 
             The following table contains a list of materials and the respective refractive index $n$. For liquids, the index is measured at $20^\circ \textrm{C}$.
             
@@ -178,4 +192,5 @@
     </script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="example1.js"></script>
+    <script src="example2.js"></script>
 </html>
