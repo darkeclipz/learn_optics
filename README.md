@@ -2,10 +2,16 @@
 
 This repository contains various things that I've created while studying Geometric Optics.
 
- * Document with Wikipedia information describing each topic concisely.
- * Implementation of an optics engine with HTML canvas.
+ * [Document with Wikipedia information](https://darkeclipz.github.io/learn_optics/optics.html) describing each topic concisely.
+ * Implementation of a JavaScript optics engine (Optix) with HTML canvas.
 
-[Link to notes](https://darkeclipz.github.io/learn_optics/optics.html)
+# Applications
+
+The following are three ideas that I'm working on when I have time.
+
+ * Implement a 2D optics engine.
+ * Implement a 3D ray tracer.
+ * Implement a 3D spectral ray tracer, see reference 6.
 
 # References
 
