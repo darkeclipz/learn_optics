@@ -91,9 +91,13 @@ optix.scene.lights.push(laser);
 
 Medium determine how the physics should behave when it collides with a shape. 
 
+To create a new medium:
+
 ```javascript
 let medium = Optix.createMedium();
 ```
+
+A medium has the following parameters: `reflect`, `diffuseFactor`, `refract`, `refractiveIndex`, `absorb`.
 
 ### Reflection
 
@@ -141,7 +145,7 @@ let triangle = Optix.createTriangle(pos: Vec2, rot: number, scale: number,
 optix.scene.shapes.push(triangle);
 ```
 
-# Example
+# Examples
 
 This is a list of a few examples:
 
